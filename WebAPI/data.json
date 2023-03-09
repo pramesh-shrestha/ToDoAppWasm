@@ -1,0 +1,48 @@
+{
+  "Users": [
+    {
+      "Id": 1,
+      "UserName": "Troels"
+    },
+    {
+      "Id": 2,
+      "UserName": "Pramesh"
+    },
+    {
+      "Id": 3,
+      "UserName": "Rajip"
+    },
+    {
+      "Id": 4,
+      "UserName": "Suhani"
+    },
+    {
+      "Id": 5,
+      "UserName": "string"
+    },
+    {
+      "Id": 6,
+      "UserName": "john"
+    }
+  ],
+  "Todos": [
+    {
+      "Id": 1,
+      "Owner": {
+        "Id": 1,
+        "UserName": "Troels"
+      },
+      "Title": "abc",
+      "IsCompleted": true
+    },
+    {
+      "Id": 2,
+      "Owner": {
+        "Id": 2,
+        "UserName": "Pramesh"
+      },
+      "Title": "suhani",
+      "IsCompleted": true
+    }
+  ]
+}
