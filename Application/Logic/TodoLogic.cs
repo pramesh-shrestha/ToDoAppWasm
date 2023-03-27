@@ -50,10 +50,12 @@ public class TodoLogic : ITodoLogic {
             }
         }
 
-        if (dto.IsCompleted != null && existing.IsCompleted && (bool)dto.IsCompleted) {
+        if (dto.IsCompleted != null && existing.IsCompleted && !(bool)dto.IsCompleted) {
             throw new Exception("Cannot un-complete a completed Todo");
         }
 
+        // It uses the null-coalescing operator (??) to assign a value to userToUser based on the values of user and existing.Owner.
+        // If user is not null, userToUser is assigned the value of user. If user is null, userToUser is assigned the value of existing.Owner.
         User userToUser = user ?? existing.Owner;
         string titleToUse = dto.Title ?? existing.Title;
         bool completedToUse = dto.IsCompleted ?? existing.IsCompleted;
@@ -81,7 +83,7 @@ public class TodoLogic : ITodoLogic {
         await todoDao.DeleteAsync(dto);
     }
 
-    //get specific todo by id
+    //get specific to do by id
     public async Task<TodoGetByIdDto> GetTodoById(int id) {
         Todo todo = await todoDao.GetByIdAsync(id);
         if (todo == null) {
@@ -91,7 +93,11 @@ public class TodoLogic : ITodoLogic {
         TodoGetByIdDto todoById = new TodoGetByIdDto(todo.Owner.UserName, todo.Id, todo.Title,todo.IsCompleted);
         return todoById;
     }
-    
+
+    public async Task DeleteAsyncById(int id) {
+        await todoDao.DeleteAsyncById(id);
+    }
+
 
     private void ValidateTodo(Todo dto)
     {

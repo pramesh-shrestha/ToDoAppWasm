@@ -11,5 +11,6 @@ public interface ITodoDao {
     //To retrieve a single Todo given and Id
     Task<Todo> GetByIdAsync(int id);
     Task DeleteAsync(TodoDeleteDto dto);
-  
+
+    Task DeleteAsyncById(int id);
 }

@@ -1,0 +1,94 @@
+﻿ @* This means we can access this page with a sub-uri, e.g.: ...localhost:port/EditTodo/7 *@
+ @* The idea is then, that the page will display Todo with ID 7. I don't specifically need the :int part, but this is a constraint.  *@
+ @* If we leave it out, e.g. /EditTodo/{id}, then id will be a string, and it must be assigned to a string property, and we would have to parse it to an int afterwards. *@
+ 
+@page "/EditTodo/{id:int}"
+ @using Domain.DataTransferObjects
+ @using Domain.Models
+@using HttpClients.ClientInterfaces
+ @inject IUserService UserService
+ @inject ITodoService TodoService
+ @inject NavigationManager NavMgr
+                         
+ <div class="card">
+     @* We have the usual checks of things not being null or empty in the HTML, because we might get errors trying
+      to render something from a null-variable. If there is no data, e.g. !users.Any(), the user should be informed. *@
+     @if (users == null) {
+         <label>Loading users...</label>
+     }
+     else if (!users.Any()) {
+         <label>No users, you cannot create a Todo</label>
+     }
+     else if (dto == null) {
+         <label>Loading Todo data..</label>
+     }
+     else {
+         <h3>Update Todo</h3>
+         <div class="form-group field">
+             <label>Title:</label>
+             <input type="text" @bind="dto.Title"/>
+         </div>
+         <div class="form-group field">
+             <label>Assignee:</label>
+             <select @bind="dto.OwnerId">
+         
+                 <option>Choose</option>
+                 @foreach (User user in users) {
+                     <option value="@user.Id">@user.UserName</option>
+                 }
+             </select>
+         </div>
+         <div class="button-row">
+             <button @onclick="UpdateAsync" class="acceptbtn">Update</button>
+         </div>
+     }
+     @if (!string.IsNullOrEmpty(msg)) {
+         <label style="color: red">@msg</label>
+     }
+ </div>
+
+ @code {
+
+  //Here we define the int property to hold the ID of the To-do we wish to edit. Remember, the value for this property
+  //was provided through the URI to the page: in the @page directive, we specified /{id:int}.
+  //Because the property has the same name (ignoring case) as the URI parameter, and is marked with the parameter attribute,
+  //the value from the URI will be pasted into the property when the page is accessed.
+  [Parameter]
+  public int Id { get; set; }
+  private TodoUpdateDto dto = null;
+  private string msg = "";
+  private IEnumerable<User> users;
+
+  protected override async Task OnInitializedAsync() {
+   msg = "";
+   try {
+    users = await UserService.GetUsers();
+    TodoGetByIdDto todoData = await TodoService.GetByIdAsync(Id);
+    User currentlyAssigned = users.First(user => user.UserName.Equals(todoData.Username));
+
+    dto = new(Id) {
+     Title = todoData.Title,
+     OwnerId = currentlyAssigned.Id
+    };
+    
+   }
+   catch (Exception e) {
+    Console.WriteLine(e);
+    msg = e.Message;
+   }
+  }
+  
+  // And finally the Update method. Once the user has modified the data as needed, they click a button, which will call this method:
+  private async Task UpdateAsync() {
+   try {
+    // We hand over the dto to the ITodoService, and then we navigate back to the View Todos page.
+    await TodoService.UpdateAsync(dto);
+    NavMgr.NavigateTo("/ViewTodo");
+   }
+   catch (Exception e) {
+    Console.WriteLine(e);
+    msg = e.Message;
+   }
+  }
+
+ }

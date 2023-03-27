@@ -23,6 +23,13 @@ builder.Services.AddScoped<ITodoLogic, TodoLogic>();
 
 var app = builder.Build();
 
+//enabling Cross Origin Resource Sharing to access the API
+app.UseCors(x => x
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(origin => true) // allow any origin
+    .AllowCredentials());
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment()) {
     app.UseSwagger();

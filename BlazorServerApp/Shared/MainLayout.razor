@@ -1,0 +1,23 @@
+﻿ @* if you want a very different layout of your app, this file is where to change the overall structure. *@
+ 
+@* @inherits LayoutComponentBase means that this class inherits the additional functionality from LayoutComponentBase class *@
+@inherits LayoutComponentBase 
+
+<PageTitle>TodoApp</PageTitle>
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu/>
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <article class="content px-4">
+            @* Body must not be removed at any cost *@
+            @Body
+        </article>
+    </main>
+</div>

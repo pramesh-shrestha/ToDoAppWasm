@@ -1,0 +1,163 @@
+﻿@page "/ViewTodo"
+@using Domain.Models
+@using UIComponents
+@using HttpClients.ClientInterfaces
+@using Domain.DataTransferObjects
+@inject ITodoService TodoService
+@inject NavigationManager NavMgr
+
+<h3>ViewTodo</h3>
+
+<div class="filter-bar">
+    <div class="filters-container">
+        @* Inside the parenthesis is a "ternary expression", it is a short-hand if-then-else. If doShowFilters is true, the "clear_" is returned, otherwise the "".  *@
+        <img src="css/icons/@(doShowFilters ? "clear_" : "")funnel.png" class="funnel" @onclick="@(() => doShowFilters = !doShowFilters)" alt="Funnel">
+        @if (doShowFilters) {
+            <div class="filter">
+                <label>Username:</label>
+                <input type="text" @bind="usernameFilter"/>
+            </div>  
+            
+            <div class="filter">
+                <label>User id:</label>
+                <input type="number" @bind= "userIdFilter"/>
+            </div>
+            
+            <div class="filter">
+                <label>Is completed?</label>
+                <select @bind="completedStatusFilter">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            
+            <div class="filter">
+                <label>Title contains:</label>
+                <input type="text" @bind="titleContainsFilter"/>
+            </div>
+        }
+        
+    </div>
+</div>
+
+<div>
+    <button @onclick="LoadTodos">Load</button>
+</div>
+
+@if (todos == null) {
+}
+else if (!todos.Any()) {
+    <p>No todos to display</p>
+} else {
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Todo ID</th>
+            <th>Owner ID</th>
+            <th>Title</th>
+            <th>Completed?</th>
+            <th>Edit</th>
+            <th>Delete?</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var item in todos) {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Owner.UserName</td>
+                <td>@item.Title</td>
+                <td>
+                    <FancyCheckBox IsCompleted="@item.IsCompleted" OnChange="@((status) => CompleteTodo(item, status))"></FancyCheckBox>
+                </td>
+                <td>
+                    <img src="css/icons/edit.gif" class="funnel" @onclick="@(() => NavMgr.NavigateTo($"/EditTodo/{item.Id}"))"/>
+                </td>
+                <td>
+                    <label @onclick="@(() => RemoveTodo(item.Id))" style="cursor: pointer; color: red; font-weight: bold">&#x2717;</label>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@if (!string.IsNullOrEmpty(msg))
+{
+    <label style="color: red">@msg</label>
+}
+
+
+@code {
+    private IEnumerable<Todo>? todos;
+    private string msg = "";
+    private bool doShowFilters = false; //to determine whether the filters should be shown or not.
+    
+    private string? usernameFilter;
+    private int? userIdFilter;
+    private string? completedStatusFilter;
+    private string? titleContainsFilter;
+
+    public async Task LoadTodos() {
+        try {
+            bool? completedFilterValue = null;
+            if (!string.IsNullOrEmpty(completedStatusFilter) && !completedStatusFilter.Equals("all")) { //if all is selected, the filter is not applied.
+                completedFilterValue = bool.Parse(completedStatusFilter);
+            }
+            todos = await TodoService.GetAsync(usernameFilter,userIdFilter,completedFilterValue, titleContainsFilter);
+        }
+        catch (Exception e) {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+
+    private async Task CompleteTodo(Todo item, bool status) {
+        TodoUpdateDto dto = new(item.Id) {
+            IsCompleted = status
+        };
+        try
+        {
+            await TodoService.UpdateAsync(dto);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+    
+    //delete to do by an id
+    private async Task RemoveTodo(int todoId) {
+        msg = "";
+
+        try {
+
+            TodoGetByIdDto dto = await TodoService.GetByIdAsync(todoId);
+            TodoDeleteDto dto1 = new(dto.Id);
+                await TodoService.DeleteAsync(todoId);
+    // todos is an IEnumerable, which cannot be modified. So:
+            //
+            // First convert the IEnumerable to a List
+            // Then remove from the List
+            // Then assign todos to be the List converted to an IEnumerable.
+            var list = new List<Todo>(todos!); //This line of code is same as:
+            // var list = new List<To do>();
+            // foreach (var to do in todos)
+            // {
+            //     list.Add(to do);
+            // }
+            list.RemoveAll(todo => todo.Id == todoId);
+            todos = list.AsEnumerable();
+        }
+        catch (Exception e) {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+        //Alternatively we could just call LoadTodos() again, to reload the todos from the server.
+        //This requires an extra call across the network, which may be resource heavy. It is the quick fix,
+        //but probably not the most efficient solution. If there is no need to call the server, then there is no need to call the server
+    }
+
+}

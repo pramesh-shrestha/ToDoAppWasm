@@ -1,0 +1,52 @@
+﻿@page "/ViewUsers" //The page directive, i.e. the URI to access this page.
+@using Domain.Models
+@using HttpClients.ClientInterfaces
+@* Here we inject an IUserService instance. *@
+@inject IUserService UserService   
+
+<h3 style="text-align: center">Overview of all users</h3>
+
+@if (!string.IsNullOrEmpty(msg)) {
+    <div>
+        @* Here we display the msg in case it has any value. This happens in case of errors. *@
+        <span>@msg</span>
+    </div>
+}
+@* Again, notice how @ is used to inline some C# code, which is evaluated to generate the resulting HTML. 
+We can inline C# just about anywhere, so the dynamic HTML generation can be very flexible. *@
+@if (users == null) {
+    <span>Loading...</span>
+} else if (!users.Any()) {
+    <span>No users to be found</span>
+}
+else {
+    <div class="users-container"></div>
+        @foreach (User user in users) {
+            <div class="user-card">
+                <label>@user.UserName</label>
+            </div>
+        }
+}
+
+@code {
+    private IEnumerable<User>? users;
+    private string msg = "";
+
+    //The method, OnInitializedAsync, is overridden from ComponentBase. All blazor components automatically inherits from it.
+    //This specific method is automatically called, whenever the page loads.
+    //It just retrieves a collection of Users from through the IUserService. In case of errors, the message is assigned to msg, which can then be displayed in the view.
+    protected override async Task OnInitializedAsync() {
+        msg = "";
+
+        try {
+            //Even though this method in IUserService contians parameters, we don't need to provide any because of nullable property.
+            //If the nullable parameter has a reference type, such as string?, you can pass an empty value as a parameter
+            users = await UserService.GetUsers();
+          
+        }
+        catch (Exception e) {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+}   

@@ -1,0 +1,73 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = BlazorServerApp
+build_property.RootNamespace = BlazorServerApp
+build_property.ProjectDir = C:\Users\prmss\RiderProjects\ToDoAppWasm\BlazorServerApp\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\prmss\RiderProjects\ToDoAppWasm\BlazorServerApp
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/prmss/RiderProjects/ToDoAppWasm/BlazorServerApp/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/prmss/RiderProjects/ToDoAppWasm/BlazorServerApp/Pages/EditTodo.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdFRvZG8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/prmss/RiderProjects/ToDoAppWasm/BlazorServerApp/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/prmss/RiderProjects/ToDoAppWasm/BlazorServerApp/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/prmss/RiderProjects/ToDoAppWasm/BlazorServerApp/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/prmss/RiderProjects/ToDoAppWasm/BlazorServerApp/Pages/CreateTodo.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlYXRlVG9kby5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-qnfmole7nd
+
+[C:/Users/prmss/RiderProjects/ToDoAppWasm/BlazorServerApp/Pages/CreateUser.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlYXRlVXNlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-3j3wm6wt7h
+
+[C:/Users/prmss/RiderProjects/ToDoAppWasm/BlazorServerApp/Pages/UIComponents/FancyCheckBox.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVUlDb21wb25lbnRzXEZhbmN5Q2hlY2tCb3gucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-28nass88sl
+
+[C:/Users/prmss/RiderProjects/ToDoAppWasm/BlazorServerApp/Pages/ViewTodo.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmlld1RvZG8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-dbzn2tyyc1
+
+[C:/Users/prmss/RiderProjects/ToDoAppWasm/BlazorServerApp/Pages/ViewUsers.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmlld1VzZXJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-ih9vf68nzz
+
+[C:/Users/prmss/RiderProjects/ToDoAppWasm/BlazorServerApp/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-gp1kaosdc3
+
+[C:/Users/prmss/RiderProjects/ToDoAppWasm/BlazorServerApp/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-01dw2z9bbm
+
+[C:/Users/prmss/RiderProjects/ToDoAppWasm/BlazorServerApp/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/prmss/RiderProjects/ToDoAppWasm/BlazorServerApp/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 

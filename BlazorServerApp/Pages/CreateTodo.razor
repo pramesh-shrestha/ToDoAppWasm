@@ -1,0 +1,91 @@
+﻿@page "/CreateTodo"
+@using HttpClients.ClientInterfaces
+@using Domain.Models
+@using Domain.DataTransferObjects
+@inject ITodoService TodoService
+@inject IUserService UserService
+@* This NavigationMagager class is already registered as a service, so we don't need to register it manually in program.cs
+This is needed so that we can use its NavigateTo method to navigate to different pages from a particular page.  *@
+@inject NavigationManager NavMgr 
+
+<div class="card">
+    @if (users == null) {
+        <label>Loading users...</label>
+    } else if (!users.Any()) {
+        <label>No users, you cannot create a Todo without an assignee.</label>
+    }
+    else {
+        <h3>CreateTodo</h3>
+        <div class="form-group field">
+            <label>Title:</label>
+            <input type="text" @bind="todoTitle">
+        </div>
+        
+        <div class="form-group field">
+            <label>Assignee:</label>
+            <select @bind="selectedUserId">
+                <option>Choose</option>
+                @foreach (User user in users) {
+                    // The value="@user.Id" specifies what will be pushed to the field variable selectedUserId. The @user.UserName is what will be displayed.
+                    <option value="@user.Id">@user.UserName</option>
+                }
+            </select>
+        </div>
+        
+        <div class="button-row">
+            @if (!string.IsNullOrEmpty(msg)) {
+                <label style="color: red">@msg</label>
+            }
+            <button @onclick= "(() => Create())" disabled="@(string.IsNullOrEmpty(todoTitle))" class="acceptbtn">Create</button>
+        </div>
+    }
+</div>
+
+
+
+@code {
+    private IEnumerable<User>? users;
+    private string msg = "";
+
+    private int? selectedUserId;
+    private string todoTitle = "";
+
+    protected override async Task OnInitializedAsync() {
+        msg = "";
+
+        try {
+            users = await UserService.GetUsers();
+        }
+        catch (Exception e) {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+
+    private async Task Create() {
+        msg = "";
+        if (selectedUserId == null)
+        {
+            msg = "You must select an assignee!";
+            return;
+        }
+        if (string.IsNullOrEmpty(todoTitle))
+        {
+            msg = "Title cannot be empty!";
+            return;
+        }
+
+        try {
+            TodoCreationDTO dto = new TodoCreationDTO((int)selectedUserId, todoTitle); //we cast to int because nullable int and int are two different data types
+            await TodoService.CreateAsync(dto);
+            NavMgr.NavigateTo("/"); //we can user NavigateTo to navigate to different pages.
+            
+        }
+        catch (Exception e) {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+        
+    }
+
+}

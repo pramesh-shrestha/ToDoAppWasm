@@ -70,6 +70,7 @@ public class TodoFileDao : ITodoDao {
         return Task.FromResult(todo);   
     }
 
+    //delete by dto
     public Task DeleteAsync(TodoDeleteDto dto) {
 
         Todo? existing = context.Todos.FirstOrDefault(td =>
@@ -82,5 +83,17 @@ public class TodoFileDao : ITodoDao {
         context.SaveChanges();
         return Task.CompletedTask;
     }
-    
+
+    //delete by id
+    public Task DeleteAsyncById(int id) {
+        Todo? existing = context.Todos.FirstOrDefault(td => td.Id == id);
+        
+        if (existing == null) {
+            throw new Exception($"Todo with id {id} does not exist!");
+        }
+
+        context.Todos.Remove(existing);
+        context.SaveChanges();
+        return Task.CompletedTask;
+    }
 }

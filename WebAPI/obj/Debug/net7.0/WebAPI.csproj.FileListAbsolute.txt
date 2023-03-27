@@ -1,5 +1,6 @@
 C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\appsettings.Development.json
 C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\appsettings.json
+C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\data.json
 C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\WebAPI.exe
 C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\WebAPI.deps.json
 C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\WebAPI.runtimeconfig.json
@@ -10,6 +11,12 @@ C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\Microsoft.OpenA
 C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\Application.dll
+C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\Domain.dll
+C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\FileData.dll
+C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\Application.pdb
+C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\FileData.pdb
+C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\Domain.pdb
 C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\obj\Debug\net7.0\WebAPI.csproj.AssemblyReference.cache
 C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\obj\Debug\net7.0\WebAPI.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\obj\Debug\net7.0\WebAPI.AssemblyInfoInputs.cache
@@ -31,10 +38,3 @@ C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\obj\Debug\net7.0\refint\WebAPI.d
 C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\obj\Debug\net7.0\WebAPI.pdb
 C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\obj\Debug\net7.0\WebAPI.genruntimeconfig.cache
 C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\obj\Debug\net7.0\ref\WebAPI.dll
-C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\Application.dll
-C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\Domain.dll
-C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\FileData.dll
-C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\Application.pdb
-C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\FileData.pdb
-C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\Domain.pdb
-C:\Users\prmss\RiderProjects\ToDoAppWasm\WebAPI\bin\Debug\net7.0\data.json

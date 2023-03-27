@@ -1,0 +1,23 @@
+﻿@namespace UIComponents
+
+
+<label class="checkbox-container">
+    @* @((arg) => OnChange.InvokeAsync((bool)arg.Value!)): defines a lambda expression that takes an argument arg.
+    The OnChange property of the component is an EventCallback<bool> type, which is invoked asynchronously by passing
+    the arg.Value property as the new value of the IsCompleted property. *@
+    <input
+        type="checkbox"
+        class="checkbox-input"
+
+        checked="@IsCompleted"
+        @onchange="@((arg) => OnChange.InvokeAsync((bool)arg.Value!))"/>
+    <span class="checkbox-span"></span>
+</label>
+
+@code {
+    [Parameter]
+    public bool IsCompleted { get; set; }
+    
+    [Parameter]
+    public EventCallback<bool> OnChange { get; set; }
+}
