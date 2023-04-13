@@ -1,8 +1,11 @@
 using Application.DAOInterfaces;
 using Application.Logic;
 using Application.LogicInterfaces;
+using EfcDataAccess;
+using EfcDataAccess.DAOs;
 using FileData;
 using FileData.DAOs;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,11 +18,17 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<FileContext>();
-builder.Services.AddScoped<IUserDAO, UserFileDAO>();
+builder.Services.AddScoped<IUserDAO, UserEfcDao>();
 builder.Services.AddScoped<IUserLogic, UserLogic>();
 
-builder.Services.AddScoped<ITodoDao, TodoFileDao>();
+builder.Services.AddScoped<ITodoDao, ToDoEfcDao>();
 builder.Services.AddScoped<ITodoLogic, TodoLogic>();
+
+builder.Services.AddDbContext<ToDoContext>();
+
+//this can be done if we use connection string to connect to the sqlite database
+// builder.Services.AddDbContext<ToDoContext>(options =>
+//     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultSqliteConnection")));
 
 var app = builder.Build();
 

@@ -12,4 +12,8 @@ public class SearchTodoParametersDto {
         CompletedStatus = completedStatus;
         TitleContains = titleContains;
     }
+
+    public override string ToString() {
+        return $"Username {Username} userId {UserId} complete {CompletedStatus} title {TitleContains}";
+    }
 }

@@ -36,19 +36,21 @@ public class TodoFileDao : ITodoDao {
         }
 
         if (searchParameters.UserId != null) {
-            todos = context.Todos.Where(todo =>
+            todos = todos.Where(todo =>
                 todo.Id == searchParameters.UserId);
         }
-
+        
         if (searchParameters.CompletedStatus != null) {
-            todos = context.Todos.Where(todo =>
+            todos = todos.Where(todo =>
                 todo.IsCompleted == searchParameters.CompletedStatus);
         }
-
+        
         if (searchParameters.TitleContains != null) {
-            todos = context.Todos.Where(todo =>
-                todo.Title.Equals(searchParameters.TitleContains, StringComparison.OrdinalIgnoreCase));
+            todos = todos.Where(todo =>
+                todo.Title.Contains(searchParameters.TitleContains, StringComparison.OrdinalIgnoreCase));
         }
+        
+     
 
         return Task.FromResult(todos);
     }
@@ -69,21 +71,7 @@ public class TodoFileDao : ITodoDao {
         Todo? todo = context.Todos.FirstOrDefault(td => td.Id == id);
         return Task.FromResult(todo);   
     }
-
-    //delete by dto
-    public Task DeleteAsync(TodoDeleteDto dto) {
-
-        Todo? existing = context.Todos.FirstOrDefault(td =>
-            td.Id == dto.Id);
-        if (existing == null) {
-            throw new Exception($"Todo with id {dto.Id} does not exist!");
-        }
-
-        context.Todos.Remove(existing);
-        context.SaveChanges();
-        return Task.CompletedTask;
-    }
-
+    
     //delete by id
     public Task DeleteAsyncById(int id) {
         Todo? existing = context.Todos.FirstOrDefault(td => td.Id == id);

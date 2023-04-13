@@ -43,15 +43,6 @@
   ],
   "Todos": [
     {
-      "Id": 8,
-      "Owner": {
-        "Id": 2,
-        "UserName": "Pramesh"
-      },
-      "Title": "Complete Authentication",
-      "IsCompleted": true
-    },
-    {
       "Id": 3,
       "Owner": {
         "Id": 2,

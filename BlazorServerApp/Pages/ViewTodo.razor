@@ -133,10 +133,7 @@ else if (!todos.Any()) {
         msg = "";
 
         try {
-
-            TodoGetByIdDto dto = await TodoService.GetByIdAsync(todoId);
-            TodoDeleteDto dto1 = new(dto.Id);
-                await TodoService.DeleteAsync(todoId);
+            await TodoService.DeleteAsync(todoId);
     // todos is an IEnumerable, which cannot be modified. So:
             //
             // First convert the IEnumerable to a List

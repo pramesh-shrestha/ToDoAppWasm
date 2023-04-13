@@ -3,8 +3,8 @@
 public class Todo
 {
     public int Id { get; set; }
-    public User Owner { get; }
-    public string Title { get; }
+    public User Owner { get; private set; }
+    public string Title { get; private set; }
     public bool IsCompleted { get; set; }
     
 
@@ -12,5 +12,8 @@ public class Todo
     {
         Owner = owner;
         Title = title;
+    }
+
+    private Todo() {
     }
 }

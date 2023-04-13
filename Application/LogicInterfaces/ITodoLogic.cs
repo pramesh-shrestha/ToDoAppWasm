@@ -14,7 +14,6 @@ public interface ITodoLogic {
 
     Task UpdateAsync(TodoUpdateDto dto);
     
-    Task DeleteAsync(TodoDeleteDto dto);
     Task<TodoGetByIdDto> GetTodoById(int id);
 
     Task DeleteAsyncById(int id);

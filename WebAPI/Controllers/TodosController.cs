@@ -22,7 +22,7 @@ public class TodosController : ControllerBase { //The class extends ControllerBa
     }
 
     //Endpoint
-    [HttpPost] //we mark the method as [HttpPost] to say that POST requests to /users should hit this endpoint.
+    [HttpPost] //we mark the method as [HttpPost] to say that POST requests to /users should hit this endpoint. 
     public async Task<ActionResult<Todo>> CreateAsync([FromBody]TodoCreationDTO dto) {
         
         try {
@@ -39,7 +39,6 @@ public class TodosController : ControllerBase { //The class extends ControllerBa
     public async Task<ActionResult<IEnumerable<Todo>>> GetAsync([FromQuery] string? userName,
         [FromQuery] int? userId, [FromQuery] bool? completedStatus, [FromQuery] string? titleContains) {
         try {
-            Console.WriteLine("Get async");
             SearchTodoParametersDto parameters = new SearchTodoParametersDto(userName,userId,completedStatus,titleContains);
             IEnumerable<Todo> todos = await todoLogic.GetAsync(parameters);
             return Ok(todos);
@@ -63,20 +62,7 @@ public class TodosController : ControllerBase { //The class extends ControllerBa
             return StatusCode(500, e.Message);
         }
     }
-    
-    //delete
-    [HttpDelete]
-    public async Task<ActionResult> Delete([FromBody] TodoDeleteDto dto) {
-        try {
-            await todoLogic.DeleteAsync(dto);
-            return Ok();
-        }
-        catch (Exception e) {
-            Console.WriteLine(e);
-            return StatusCode(500, e.Message);
-        }
-    }
-    
+
     //delete by id
     [HttpDelete("{id:int}")]
     public async Task<ActionResult> Delete([FromRoute] int id) {

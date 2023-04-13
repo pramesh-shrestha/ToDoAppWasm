@@ -23,6 +23,7 @@ public class TodoHttpClient : ITodoService {
     }
 
     public async Task<ICollection<Todo>> GetAsync(string? userName, int? userId , bool? completedStatus, string? titleContains) {
+        Console.WriteLine($"Username {userName} userId {userId} complete {completedStatus} title {titleContains}");
 
         string query = ConstructQuery(userName, userId, completedStatus, titleContains);
         
@@ -47,25 +48,22 @@ public class TodoHttpClient : ITodoService {
         string query = "";
         if (!string.IsNullOrEmpty(userName)) {
             query += $"?username={userName}";
-            Console.WriteLine("username");
         }
 
         if (userId != null) {
             query += string.IsNullOrEmpty(query) ? "?" : "&";
-            query += $"userid = {userId}";
-            Console.WriteLine("userId");
+            query += $"userid={userId}";
         }
 
         if (completedStatus != null) {
             query += string.IsNullOrEmpty(query) ? "?" : "&";
             query += $"completedstatus={completedStatus}";
-            Console.WriteLine("completedStatus");
         }
 
         if (!string.IsNullOrEmpty(titleContains)) {
             query += string.IsNullOrEmpty(query) ? "?" : "&";
             query += $"titlecontains={titleContains}";
-            Console.WriteLine("title contains");
+           
         }
 
         return query;
